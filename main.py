@@ -1,7 +1,7 @@
 
 import streamlit as st
-# from langchain_community.document_loaders import WebBaseLoader
-from langchain.document_loaders import WebBaseLoader
+from langchain_community.document_loaders import WebBaseLoader
+
 import pandas as pd
 import requests
 import json
