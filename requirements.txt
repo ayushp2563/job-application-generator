@@ -1,0 +1,19 @@
+streamlit==1.32.0
+# Remove specific versions to let pip solve dependencies
+langchain
+langchain-community
+langchain-core
+# Either remove langchain-groq or update to a compatible version
+langchain-groq==0.3.2
+pandas==2.2.0
+python-dotenv==1.0.1
+requests==2.31.0
+beautifulsoup4==4.12.2
+psycopg2-binary
+streamlit-authenticator
+selenium
+webdriver-manager
+SQLAlchemy
+python-jose
+passlib
+pytest
