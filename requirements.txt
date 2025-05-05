@@ -1,10 +1,8 @@
 streamlit==1.32.0
-# Remove specific versions to let pip solve dependencies
 langchain
 langchain-community
 langchain-core
-# Either remove langchain-groq or update to a compatible version
-langchain-groq==0.3.2
+langchain-groq==0.1.4
 pandas==2.2.0
 python-dotenv==1.0.1
 requests==2.31.0
