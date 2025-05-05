@@ -1,11 +1,19 @@
-
+import os
 import streamlit as st
-from langchain_community.document_loaders import WebBaseLoader
+from dotenv import load_dotenv
 
+# Load environment variables first thing
+load_dotenv()
+
+# Debug: Check if the key is available (remove in production)
+if not os.getenv("GROQ_API_KEY"):
+    st.error("GROQ_API_KEY not found in environment variables!")
+    st.info("Please make sure your .env file exists and contains the GROQ_API_KEY.")
+
+from langchain_community.document_loaders import WebBaseLoader
 import pandas as pd
 import requests
 import json
-import os
 from datetime import datetime
 import uuid
 from sqlalchemy.orm import Session
