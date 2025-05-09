@@ -1,23 +1,7 @@
-# import re
-
-# def clean_text(text):
-#     # Remove HTML tags
-#     text = re.sub(r'<[^>]*?>', '', text)
-#     # Remove URLs
-#     text = re.sub(r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\\(\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', '', text)
-#     # Remove special characters
-#     text = re.sub(r'[^a-zA-Z0-9 ]', '', text)
-#     # Replace multiple spaces with a single space
-#     text = re.sub(r'\s{2,}', ' ', text)
-#     # Trim leading and trailing whitespace
-#     text = text.strip()
-#     # Remove extra whitespace
-#     text = ' '.join(text.split())
-#     return text
-
 import re
 import os
 import requests
+import streamlit as st
 
 def clean_text(text):
     # Remove HTML tags
@@ -37,12 +21,12 @@ def clean_text(text):
 def find_recruiter_email(company_name):
     """
     Attempts to find a recruiter email for the given company using Hunter.io API
-    
-    Note: This requires a Hunter.io API key set as HUNTER_API_KEY environment variable
-    If not available, it will return None
     """
-    api_key = os.getenv("HUNTER_API_KEY")
+    # Try to get API key from Streamlit secrets first, then fall back to environment variable
+    api_key = st.secrets.get("HUNTER_API_KEY", os.getenv("HUNTER_API_KEY"))
+    
     if not api_key or not company_name:
+        st.warning("Hunter.io API key not found. Please add it to your Streamlit secrets.")
         return None
         
     try:
@@ -75,6 +59,6 @@ def find_recruiter_email(company_name):
                 return emails[0].get('value')
     
     except Exception as e:
-        print(f"Error finding recruiter email: {e}")
+        st.error(f"Error finding recruiter email: {e}")
     
     return None
